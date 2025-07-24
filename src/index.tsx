@@ -5,7 +5,7 @@ const app = new Hono();
 
 app.use(renderer);
 
-app.get("/", (c) => {
+const homepageHandler = (c: any) => {
   return c.render(
     <>
       <header>
@@ -170,5 +170,13 @@ app.get("/", (c) => {
       </footer>
     </>
   );
+};
+
+// app.get("/", homepageHandler);
+
+// Global redirect to https://meet-us.developers.workers.dev
+app.get("*", (c) => {
+  return c.redirect("https://meet-us.developers.workers.dev", 301);
 });
+
 export default app;
